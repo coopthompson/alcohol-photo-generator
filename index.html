@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcohol Image Finder</title>
+</head>
+<body>
+    <h2>Alcohol Image Finder</h2>
+    <input type="text" id="alcoholName" placeholder="Enter alcohol name">
+    <button onclick="fetchImage()">Search</button>
+    <div id="imageContainer">
+        <img id="alcoholImage" src="" alt="Alcohol Image" style="display: none; max-width: 300px;">
+    </div>
+
+    <script>
+        function fetchImage() {
+            const name = document.getElementById('alcoholName').value.trim();
+            if (!name) {
+                alert("Please enter a name!");
+                return;
+            }
+
+            fetch(`http://localhost:3000/image?name=${name}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Image not found for the given name.");
+                        document.getElementById('alcoholImage').style.display = 'none';
+                    } else {
+                        document.getElementById('alcoholImage').src = data.imageUrl;
+                        document.getElementById('alcoholImage').style.display = 'block';
+                    }
+                })
+                .catch(error => alert("Error fetching data."));
+        }
+    </script>
+</body>
+</html>
