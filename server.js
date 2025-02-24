@@ -373,11 +373,14 @@ function mapInputToBrand(inputName) {
 
 app.get('/image', (req, res) => {
     const name = req.query.name?.toLowerCase();
+
+    console.log(`Searching for ${name}`)
+
     if (!name) {
         return res.status(400).json({ error: "Missing 'name' query parameter" });
     }
 
-    let brandKey = mapInputToBrand(name);
+    const brandKey = mapInputToBrand(name);
 
     if (!brandKey) {
         return res.status(404).json({ error: "Image not found for the given name" });
@@ -387,6 +390,8 @@ app.get('/image', (req, res) => {
     if (!imageUrl) {
         return res.status(404).json({ error: "Image not found for the given name" });
     }
+    
+    console.log(`Returning image for ${name}`)
 
     res.json({ name, imageUrl });
 });
