@@ -56,4 +56,4 @@ For example, if name = smirnoff, the output would be a JSON object that looks li
 {"name":"vodka","imageUrl":"https://i.imgur.com/gVgm7gt.jpg"}
 
 C:
-![UML for the program I made](image.png)
+![UML for project](image.png)
